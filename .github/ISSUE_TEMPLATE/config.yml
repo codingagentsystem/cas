@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/codingagentsystem/cas/discussions
+    about: Ask questions and share ideas
+  - name: Documentation
+    url: https://github.com/codingagentsystem/cas#readme
+    about: Read the documentation
