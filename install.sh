@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # CAS Installation Script
-# Usage: curl -fsSL https://raw.githubusercontent.com/codingagentsystem/cas/master/install.sh | bash
+# Usage: curl -fsSL https://cas.dev/install.sh | bash
 #
 # Environment variables:
 #   CAS_VERSION    - Specific version to install (default: latest)
