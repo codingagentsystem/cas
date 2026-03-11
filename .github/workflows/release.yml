@@ -126,6 +126,8 @@ jobs:
     name: Update Homebrew Formula
     needs: release
     runs-on: ubuntu-latest
+    # Requires HOMEBREW_TAP_TOKEN secret: a PAT with push access to codingagentsystem/homebrew-cas
+    if: ${{ secrets.HOMEBREW_TAP_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
 

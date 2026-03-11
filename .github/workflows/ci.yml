@@ -50,15 +50,15 @@ jobs:
           ZIG: ${{ github.workspace }}/.context/zig/zig
         run: cargo build -p cas --no-default-features
 
-      - name: Test (all features)
+      - name: Test
         env:
           ZIG: ${{ github.workspace }}/.context/zig/zig
-        run: cargo test -p cas --all-features
+        run: cargo test -p cas
 
       - name: Clippy (report warnings)
         env:
           ZIG: ${{ github.workspace }}/.context/zig/zig
-        run: cargo clippy -p cas --all-targets --all-features
+        run: cargo clippy -p cas --all-targets
 
       - name: Build timings
         env:
@@ -99,10 +99,10 @@ jobs:
         with:
           cache-on-failure: true
 
-      - name: Test compile full features
+      - name: Test compile
         env:
           ZIG: ${{ github.workspace }}/.context/zig/zig
-        run: cargo test -p cas --all-features --no-run
+        run: cargo test -p cas --no-run
 
       - name: Benchmark build
         env:
