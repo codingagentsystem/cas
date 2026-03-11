@@ -16,7 +16,9 @@
 //! - mcp_execute: Execute tool calls across connected upstream MCP servers
 
 use rmcp::handler::server::wrapper::Parameters;
-use rmcp::model::{CallToolResult, Content, ErrorCode};
+use rmcp::model::{CallToolResult, ErrorCode};
+#[cfg(feature = "mcp-proxy")]
+use rmcp::model::Content;
 use rmcp::{ErrorData as McpError, tool, tool_router};
 
 use crate::mcp::server::CasCore;
