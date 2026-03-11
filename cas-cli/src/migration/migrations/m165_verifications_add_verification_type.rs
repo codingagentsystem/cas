@@ -12,6 +12,8 @@ pub const MIGRATION: Migration = Migration {
     description: "Add verification_type column to verifications for epic vs task verification",
     up: &["ALTER TABLE verifications ADD COLUMN verification_type TEXT NOT NULL DEFAULT 'task'"],
     detect: Some(
-        "SELECT COUNT(*) FROM pragma_table_info('verifications') WHERE name = 'verification_type'",
+        // Return 1 (already applied) if the table doesn't exist (base schema will create it
+        // with the column) OR if the column already exists
+        "SELECT CASE WHEN (SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='verifications') = 0 THEN 1 ELSE (SELECT COUNT(*) FROM pragma_table_info('verifications') WHERE name = 'verification_type') END",
     ),
 };
