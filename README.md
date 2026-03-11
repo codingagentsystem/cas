@@ -17,6 +17,8 @@
 
 [Factory](#factory) · [Context System](#context-system) · [Quick Start](#quick-start) · [Installation](#installation) · [Architecture](#architecture) · [Contributing](CONTRIBUTING.md)
 
+<img src="casdemo.png" alt="CAS Factory TUI" width="800" />
+
 </div>
 
 ---
