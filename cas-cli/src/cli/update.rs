@@ -612,12 +612,16 @@ fn check_for_updates(
     use self_update::backends::github::Update;
 
     // Check binary updates
-    let updater = Update::configure()
+    let mut builder = Update::configure();
+    builder
         .repo_owner(REPO_OWNER)
         .repo_name(REPO_NAME)
         .bin_name(BIN_NAME)
-        .current_version(current_version)
-        .build()?;
+        .current_version(current_version);
+    if let Some(token) = github_auth_token() {
+        builder.auth_token(&token);
+    }
+    let updater = builder.build()?;
 
     let latest = updater.get_latest_release()?;
     let latest_version = latest.version.trim_start_matches('v');
@@ -722,6 +726,9 @@ fn perform_update(args: &UpdateArgs, current_version: &str, cli: &Cli) -> anyhow
         .current_version(current_version)
         .show_download_progress(true)
         .no_confirm(args.yes);
+    if let Some(token) = github_auth_token() {
+        updater.auth_token(&token);
+    }
 
     // If a specific version is requested, set it
     if let Some(ref version) = args.version {
@@ -808,6 +815,31 @@ fn perform_update(args: &UpdateArgs, current_version: &str, cli: &Cli) -> anyhow
     }
 
     Ok(())
+}
+
+/// Try to get a GitHub auth token from `gh auth token` or GITHUB_TOKEN env var.
+fn github_auth_token() -> Option<String> {
+    // Try GITHUB_TOKEN env var first
+    if let Ok(token) = std::env::var("GITHUB_TOKEN") {
+        if !token.is_empty() {
+            return Some(token);
+        }
+    }
+    // Fall back to `gh auth token`
+    std::process::Command::new("gh")
+        .args(["auth", "token"])
+        .output()
+        .ok()
+        .and_then(|o| {
+            if o.status.success() {
+                String::from_utf8(o.stdout)
+                    .ok()
+                    .map(|s| s.trim().to_string())
+                    .filter(|s| !s.is_empty())
+            } else {
+                None
+            }
+        })
 }
 
 /// Compare semantic versions to check if `new` is newer than `current`
