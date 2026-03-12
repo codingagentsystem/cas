@@ -573,7 +573,7 @@ checksum = "1e748733b7cbc798e1434b6ac524f0c1ff2ab456fe201501e6497c8417a4fc33"
 
 [[package]]
 name = "cas"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "arboard",
@@ -680,7 +680,7 @@ dependencies = [
 
 [[package]]
 name = "cas-core"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "cas-store",
  "cas-types",
@@ -751,7 +751,7 @@ dependencies = [
 
 [[package]]
 name = "cas-mcp"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "cas-core",
  "cas-store",
@@ -819,7 +819,7 @@ dependencies = [
 
 [[package]]
 name = "cas-search"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "cas-code",
@@ -842,7 +842,7 @@ dependencies = [
 
 [[package]]
 name = "cas-store"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "cas-code",
@@ -880,7 +880,7 @@ dependencies = [
 
 [[package]]
 name = "cas-types"
-version = "0.7.0"
+version = "1.0.0"
 dependencies = [
  "chrono",
  "glob",
